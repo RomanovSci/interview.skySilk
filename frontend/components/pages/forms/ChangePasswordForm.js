@@ -37,11 +37,11 @@ export default class ChangePasswordForm extends BaseForm {
             .then(({data}) => {
 
                 if (data.hasOwnProperty('success') && data.success) {
-                    NotificationManager.success('Password been changed');
+                    NotificationManager.success('Password has been changed');
                     return;
                 }
 
-                NotificationManager.error('Whoops...Something went wrong');
+                NotificationManager.error(data.message);
             });
     }
 

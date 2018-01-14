@@ -83,7 +83,7 @@ class UserController extends BaseController
     /**
      * Activate user account
      *
-     * @return string
+     * @return void
      */
     public function activateAccount()
     {
@@ -96,7 +96,7 @@ class UserController extends BaseController
                 ]);
 
             if (!$user instanceof User) {
-                throw new Exception();
+                throw new Exception('Unauthorized');
             }
 
             $user->setIsActive(true);

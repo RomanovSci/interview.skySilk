@@ -36,9 +36,14 @@ export default class Account extends Component {
         }
 
         return (
-            <div>
-                <h1>Account page</h1>
-                <ChangePasswordForm/>
+            <div className="container">
+                <h2>Account settings</h2>
+                <div className="row justify-content-md-center">
+                    <div className="col-4">
+                        <h3>Change password form</h3>
+                        <ChangePasswordForm/>
+                    </div>
+                </div>
             </div>
         );
     }

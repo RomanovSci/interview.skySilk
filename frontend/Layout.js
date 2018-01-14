@@ -16,8 +16,6 @@ export default class Layout extends Component {
             <div className="wrapper">
                 <nav className="navbar navbar-light bg-faded">
                     <a className="navbar-brand" href="/">Home</a>
-                    <a className="navbar-brand" href="#/register">Register</a>
-                    <a className="navbar-brand" href="#/login">Login</a>
                 </nav>
                 <div id="content">
                     {this.props.children}

@@ -2,7 +2,10 @@ import React from 'react';
 import BaseForm from './BaseForm';
 import {hashHistory} from 'react-router';
 import {rules} from '../validation/LoginRules';
-import {NotificationContainer} from 'react-notifications';
+import {
+    NotificationContainer,
+    NotificationManager
+} from 'react-notifications';
 import axios from 'axios';
 
 export default class LoginForm extends BaseForm {

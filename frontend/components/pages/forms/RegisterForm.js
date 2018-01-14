@@ -32,11 +32,8 @@ export default class LoginForm extends BaseForm {
             .then(({data}) => {
 
                 if (data.hasOwnProperty('success') && data.success) {
-
-                    // TODO: Handling
-                    // localStorage.setItem('token', data.token);
-                    // hashHistory.push('/');
-                    // return;
+                    NotificationManager.success('Registration complete. Check your email and activate account');
+                    return;
                 }
 
                 NotificationManager.error(data.message);

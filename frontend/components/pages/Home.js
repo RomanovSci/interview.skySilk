@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {
-    NotificationManager,
-    NotificationContainer
-} from 'react-notifications';
+import {hashHistory} from 'react-router';
 
 export default class Home extends Component {
 
@@ -26,11 +23,43 @@ export default class Home extends Component {
             });
     }
 
+    handleLogout(e) {
+        e.preventDefault();
+
+        localStorage.removeItem('token');
+        hashHistory.push('login');
+    }
+
+    renderMenuList() {
+        if (this.state.isLoggedIn) {
+            return (
+                <ul>
+                    <li>
+                        <a href="#/account">Account</a>
+                    </li>
+                    <li>
+                        <a href="#" onClick={this.handleLogout.bind(this)}>Logout</a>
+                    </li>
+                </ul>
+            );
+        }
+
+        return (
+            <ul>
+                <li>
+                    <a href="#/register">Register</a>
+                </li>
+                <li>
+                    <a href="#/login">Login</a>
+                </li>
+            </ul>
+        );
+    }
+
     render() {
         return (
             <div className="container">
-                <h1>Home page</h1>
-                <NotificationContainer/>
+                {this.renderMenuList()}
             </div>
         );
     }
