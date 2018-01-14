@@ -1,7 +1,11 @@
 import React from 'react';
 import BaseForm from './BaseForm';
-import {NotificationContainer} from 'react-notifications';
+import {
+    NotificationContainer,
+    NotificationManager
+} from 'react-notifications';
 import {rules} from '../validation/ChangePasswordRules';
+import axios from 'axios';
 
 export default class ChangePasswordForm extends BaseForm {
     constructor(props) {
@@ -27,7 +31,18 @@ export default class ChangePasswordForm extends BaseForm {
            return;
         }
 
-        // TODO: Change password logic
+        axios.post('/api/password', Object.assign(this.state, {
+            token: localStorage.getItem('token')
+        }))
+            .then(({data}) => {
+
+                if (data.hasOwnProperty('success') && data.success) {
+                    NotificationManager.success('Password been changed');
+                    return;
+                }
+
+                NotificationManager.error('Whoops...Something went wrong');
+            });
     }
 
     render() {

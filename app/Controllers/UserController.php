@@ -159,6 +159,43 @@ class UserController extends BaseController
     }
 
     /**
+     * Change password action
+     * @return string
+     */
+    public function changePassword()
+    {
+        try {
+            $input = json_decode(
+                $this->request->getContent(),
+                true
+            );
+
+            /** @var User $user */
+            $user = $this->em
+                ->getRepository(User::class)
+                ->findOneBy([
+                    'accessToken' => $input['token'],
+                ]);
+
+            if (!$user instanceof User) {
+                throw new \Exception('Unauthorized');
+            }
+
+            if ($user->getPassword() !== md5($input['oldPassword'])) {
+                throw new \Exception('Incorrect old password');
+            }
+
+            $user->setPassword($input['newPassword']);
+            $this->em->persist($user);
+            $this->em->flush();
+
+            return json_encode(['success' => true]);
+        } catch (\Exception $e) {
+            return $this->unsuccess($e->getMessage());
+        }
+    }
+
+    /**
      * Check user token
      * @return string
      */
