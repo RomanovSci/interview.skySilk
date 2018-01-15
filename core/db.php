@@ -12,7 +12,7 @@ $settings = [
 
 if (getenv('DB_DRIVER') === 'pdo_sqlite') {
     unset($settings['dbname']);
-    $settings['path'] = getenv('DB_PATH');
+    $settings['path'] = __DIR__.'/../'.getenv('DB_NAME');
 }
 
 return EntityManager::create(
