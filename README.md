@@ -5,5 +5,8 @@
 * Build front-end `npm run build`
 * Run server `composer serve`
 
-### Notes
+#### Testing
+* Run `./vendor/bin/phpunit` from project directory
+
+#### Notes
 * (Simulating mail sending for development env) When you create new user, activation link write to `PROJECT_PATH/storage/logger/application.log` for `development` environment
