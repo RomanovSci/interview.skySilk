@@ -19,7 +19,7 @@ $injector->share('\Symfony\Component\HttpFoundation\Response');
 /** Template */
 $injector->share('Twig_Environment');
 $injector->define('Twig_Environment', [
-    ':loader' => new Twig_Loader_Filesystem(__DIR__.'/../app/Views')
+    ':loader' => new Twig_Loader_Filesystem(__DIR__.'/../app/Views'),
 ]);
 
 /** Database */
@@ -27,6 +27,11 @@ $entityManager = require __DIR__.'/db.php';
 $injector->share($entityManager);
 
 /** MailService */
+$injector->share('PHPMailer\PHPMailer\PHPMailer');
+$injector->define('PHPMailer\PHPMailer\PHPMailer', [':exceptions' => true]);
 $injector->share('App\Services\MailService');
+
+$injector->share('Monolog\Logger');
+$injector->define('Monolog\Logger', [':name' => 'logger']);
 
 return $injector;
